@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 
 namespace NaControl.App
 {
