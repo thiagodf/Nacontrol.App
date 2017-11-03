@@ -25,14 +25,15 @@ namespace NaControl.App.View
             InitializeComponent();
             groupService = new GroupService();
             refreshData();
-            //map.IsShowingUser = true;
 
+            map.IsShowingUser = true;
+            map.IsVisible = true;
+            
             for (int i = 0; i < groups.Count; i++)
             {
                 var pin = new Pin();
                 pin.Type = PinType.Place;
-                pin.Icon = BitmapDescriptorFactory.FromBundle("pinIcon1.png");
-
+                pin.Icon = BitmapDescriptorFactory.FromBundle("PingNA2.png");
                 pin.Label = groups[i].Name;
                 if ( groups[i].Address!=null)
                 {

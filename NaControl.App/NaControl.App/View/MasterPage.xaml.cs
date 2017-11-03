@@ -2,26 +2,26 @@
 using NaControl.App.Services;
 using System;
 using System.Collections.ObjectModel;
-
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace NaControl.App.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterPage : MasterDetailPage
+    public partial class MasterPage : MasterDetailPage, INotifyPropertyChanged
     {
-       private ObservableCollection<MasterPageItem> _menuLista;
+        private ObservableCollection<MasterPageItem> _menuLista;
 
         public MasterPage()
         {
             InitializeComponent();
-            //_contas = ContaService.GetContas();
-            //lvContas.ItemsSource = _contas;
             _menuLista = ItemService.GetMenuItens();
             navigationDrawerList.ItemsSource = _menuLista;
             // Define a propriedade ItemSource da pagina MainPage.xaml
             Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(HomePage)));
+
+            BindingContext = this;
         }
 
         private void lvContas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -39,9 +39,6 @@ namespace NaControl.App.View
             //obtem o tipo de objeto 
             Type pagina = item.TargetType;
 
-            //abre a pagina correspondente ao item selecionado
-            //Cria uma instância do tipo especificado usando o construtor
-            //que melhor se adequa ao parametro informado
             Detail = new NavigationPage((Page)Activator.CreateInstance(pagina));
             IsPresented = false;
         }
